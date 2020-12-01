@@ -9,9 +9,10 @@ for i in range(3):
     multi *= int(sys.stdin.readline())
 
 eachDigit = list(map(int, list(str(multi))))
-digitCount = [0 for i in range(9)]
+digitCount = [0 for i in range(10)]
 
 for i in range(len(eachDigit)):
-    digitCount[eachDigit[i] - 1] += 1
+    digitCount[eachDigit[i]] += 1
 
-print(digitCount)
+for eachCount in digitCount:
+    print(eachCount)
