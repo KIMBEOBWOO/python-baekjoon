@@ -5,17 +5,24 @@
 
 # 각 케이스마다 한 줄씩 평균을 넘는 학생들의 비율을 반올림하여 소수점 셋째 자리까지 출력한다.
 
-Tsize = int(input())
-cases = []
+# import math
+C = int(input())
 
-for i in range(Tsize):
-    cases.append(list(map(int, input().split())))
-    tempSum = 0
-    for j in range(1, len(cases[i])):
-        tempSum += cases[i][j]
+root = []
+for c in range(C):
+    case = list(map(int, input().split()))
+    root.append(case)
 
-    overAvgCount = 0
-    for eachCase in cases[i]:
-        if eachCase > tempSum/cases[0][0]:
-            overAvgCount += 1
-    print(overAvgCount/cases[0][0])
+for eachCase in root:
+    sum_of_case = 0
+    for j in range(1, len(eachCase)):
+        sum_of_case += eachCase[j]
+
+    count_of_upper = 0
+    avg_of_case = (sum_of_case/eachCase[0])
+
+    for k in range(1, len(eachCase)):
+        if eachCase[k] > avg_of_case:
+            count_of_upper += 1
+
+    print('%0.3f' % float(count_of_upper/eachCase[0]*100)+'%')
