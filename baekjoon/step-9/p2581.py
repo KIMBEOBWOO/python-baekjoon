@@ -39,5 +39,8 @@ for n in range(M, N + 1):
             min_prime_number = n
         sum_of_primes += n
 
-print(sum_of_primes)
-print(min_prime_number)
+if sum_of_primes > 1:
+    print(sum_of_primes)
+    print(min_prime_number)
+else:
+    print(-1)
