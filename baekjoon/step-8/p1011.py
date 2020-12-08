@@ -1,6 +1,6 @@
 import math
 
-# input
+# 테스트 케이스 횟수 입력
 T = int(input())
 
 
