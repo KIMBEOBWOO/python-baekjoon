@@ -16,41 +16,54 @@ def prime_list(n):
 def find_goldbach_partition(n: int):
     primes = prime_list(n)  # 짝수 n 보다 작은 소수 리스트
     p_index = int(len(primes)/2)-1  # 소수 리스트의 길이 상 중간 인덱스
-    finish_flag = False
-    print('initial p_index', p_index, primes[p_index])
+    result = [0, 0]
+    # print('initial p_index', p_index, primes[p_index])
 
     # 합이 n 을 넘는 최소 두 인접 인덱스 p_index 를 찾음
     if primes[p_index] + primes[p_index + 1] < n:
-        while primes[p_index] + primes[p_index + 1] <= n and not finish_flag:
+        while primes[p_index] + primes[p_index + 1] <= n and not result[0]:
             if primes[p_index] + primes[p_index + 1] == n:
                 # 종료 로직
                 # print('finish', primes[p_index], primes[p_index + 1])
-                finish_flag = True
+                result = [primes[p_index], primes[p_index + 1]]
                 break
+            if primes[p_index]*2 == n:
+                # 종료 로직
+                # print('finish', primes[p_index], primes[p_index + 1])
+                result = [primes[p_index], primes[p_index]]
             p_index += 1
-    elif primes[p_index] + primes[p_index + 1] == n:
-        # 종료 로직
-        # print('finish', primes[p_index], primes[p_index + 1])
-        finish_flag = True
+    elif primes[p_index] + primes[p_index + 1] == n or primes[p_index]*2 == n:
+        if primes[p_index] + primes[p_index + 1] == n:
+            # 종료 로직
+            # print('finish', primes[p_index], primes[p_index + 1])
+            result = [primes[p_index], primes[p_index + 1]]
+        if primes[p_index]*2 == n:
+            # 종료 로직
+            # print('finish', primes[p_index], primes[p_index + 1])
+            result = [primes[p_index], primes[p_index]]
     else:
-        while primes[p_index] + primes[p_index + 1] >= n and not finish_flag:
+        while primes[p_index] + primes[p_index + 1] >= n and not result[0]:
             if primes[p_index] + primes[p_index + 1] == n:
                 # 종료 로직
                 # print('finish', primes[p_index], primes[p_index + 1])
-                finish_flag = True
+                result = [primes[p_index], primes[p_index + 1]]
                 break
+            if primes[p_index]*2 == n:
+                # 종료 로직
+                # print('finish', primes[p_index], primes[p_index + 1])
+                result = [primes[p_index], primes[p_index]]
             p_index -= 1
+
     # print(primes)
     # print(p_index, primes[p_index], primes[p_index + 1])
     # k = p_index - 1
 
-    if finish_flag:
-        # print(p_index)
-        print(primes[p_index], primes[p_index+1])
+    if result[0]:
+        print(result[0], result[1])
 
-    # 찾은 p_index 로 합이 n 인 최소 인덱스 차 소수를 찾음!
-    while p_index != len(primes) and not finish_flag:
-        k = p_index - 1
+    # 찾은 p_index 로 합이 n 인 최소 인덱스 차 소수를 찾음
+    while p_index != len(primes) and not result[0]:
+        k = p_index
         # print(k, p_index)
         while primes[p_index] + primes[k] >= n and k >= 0:
             # print('k ', k, p_index)
@@ -58,7 +71,7 @@ def find_goldbach_partition(n: int):
                 # 종료 로직
                 # print('finish in last logic',
                 #       primes[p_index], primes[k])
-                finish_flag = True
+                result = [primes[k], primes[p_index]]
                 # return [primes[k], primes[p_index]]
                 print(primes[k], primes[p_index])
                 break
